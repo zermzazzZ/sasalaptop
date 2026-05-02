@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SASA Laptop Shop</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f5f5f5;
+}
+.products{
+    flex:1;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+    align-items:start;
+}
+
+.card{
+    background:white;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    transition:0.3s;
+    overflow:hidden;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.card-top{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.card img{
+    width:160px;
+    height:160px;
+    object-fit:contain;
+}
+
+.info{
+    flex:1;
+}
+
+.info h2{
+    font-size:34px;
+    margin-bottom:10px;
+    color:#111;
+}
+
+.spec{
+    color:#666;
+    line-height:1.8;
+    font-size:18px;
+}
+
+.price{
+    color:orangered;
+    font-size:38px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+.btn-box{
+    display:flex;
+    gap:15px;
+    margin-top:25px;
+}
+
+.btn{
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.buy{
+    background:orange;
+    color:white;
+}
+
+.cart{
+    background:#111;
+    color:white;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+}
+/* NAVBAR */
+.navbar{
+  background:#111;
+  color:white;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.head{
+  display:flex;
+  gap:15px;
+}
+
+.head a{
+  text-decoration:none;
+  color:white;
+  padding:6px 12px;
+  border-radius:6px;
+}
+
+.head a:hover{
+  background:#ff6600;
+}
+
+/* MAIN LAYOUT */
+.main{
+  display:grid;
+  grid-template-columns: 220px 120px 1fr;
+  gap:20px;
+  padding:20px;
+}
+
+/* SIDEBAR */
+.sidebar{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+}
+
+.sidebar button{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:10px;
+  border:none;
+  background:#eee;
+  cursor:pointer;
+  border-radius:6px;
+  text-align:left;
+}
+
+.sidebar button:hover{
+  background:#ffffff;
+  color:white;
+}
+
+/* CATEGORY */
+.category{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.cart-box{
+  background:white;
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+  border:2px solid #ddd;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.cart-box:hover{
+  border-color:#ff6600;
+}
+
+.cart-box img{
+  width:40px;
+}
+
+.cart-box p{
+  margin:5px 0 0;
+}
+
+/* PRODUCTS */
+.products{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+    padding:20px;
+}
+
+.card{
+    width:280px;
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.card a{
+    text-decoration:none;
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:contain;
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.card img:hover{
+    transform:scale(1.05);
+}
+
+.card h4{
+    font-size:20px;
+    margin:15px 0;
+    color:#111;
+}
+
+.price{
+    color:orangered;
+    font-size:25px;
+    font-weight:bold;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:10px;
+  padding:8px;
+  border:none;
+  background:#ff6600;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.btn:hover{
+  background:#e65c00;
+}
+
+/* FOOTER */
+.footer{
+  background:#111;
+  color:white;
+  display:flex;
+  justify-content:space-around;
+  padding:40px 20px;
+  margin-top:50px;
+}
+
+.footer-box{
+  max-width:250px;
+}
+
+.footer p{
+  color:#ccc;
+}
+
+.social a{
+  display:block;
+  color:#ccc;
+  text-decoration:none;
+  margin:5px 0;
+}
+
+.social a:hover{
+  color:#ffffff;
+}
+/* CART ICON */
+.cart-icon{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#ff6600;
+  color:white;
+  padding:10px 15px;
+  border-radius:30px;
+  cursor:pointer;
+  z-index:1000;
+}
+
+#cart-count{
+  background:white;
+  color:black;
+  padding:2px 6px;
+  border-radius:50%;
+  margin-left:5px;
+}
+
+/* POPUP */
+.cart-popup{
+  position:fixed;
+  right:-400px;
+  top:0;
+  width:300px;
+  height:100%;
+  background:white;
+  box-shadow:-5px 0 15px rgba(0,0,0,0.2);
+  padding:20px;
+  transition:0.4s;
+  z-index:999;
+}
+
+.cart-popup.active{
+  right:0;
+}
+
+.cart-item{
+  border-bottom:1px solid #ddd;
+  padding:10px 0;
+}
+
+.cart-item button{
+  background:red;
+  color:white;
+  border:none;
+  padding:5px 8px;
+  cursor:pointer;
+}
+.brand-icon {
+  width: 100px;
+  height: 35px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.brand:hover{
+    blackground: color : black;
+}
+.banner{
+  width:100%;
+  height:250px;
+  overflow:hidden;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+.banner video,
+.banner iframe{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h2>SA Laptop </h2>
+
+  <div class="head">
+    <a href="#">Profile</a>
+    <a href="#">Sign Up</a>
+    <a href="#">Join</a>
+  </div>
+</div>
+<!-- CART ICON -->
+
+</div>
+
+<!-- CART POPUP -->
+<div class="cart-popup" id="cartPopup">
+  <h3>Your Cart</h3>
+  <div id="cart-items"></div>
+  <button onclick="closeCart()">Close</button>
+</div>
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <h3>Brand</h3>
+    <button onclick="filter('toplink')">
+  <img src="https://tkcustomcomputer.com/assets/uploads/brands/444c02a9b47946260ca53194d1a7497c.png" class="brand-icon">
+  <span></span>
+</button>
+
+    <button onclick="filter('adata')">
+  <img src="https://tkcustomcomputer.com/assets/uploads/brands/c01d7cd43883076cf1a57f175fcb6309.png" class="brand-icon">
+  <span></span>
+</button>
+<button onclick="filter('MSI')">
+  <img src="https://tkcustomcomputer.com/assets/uploads/brands/1f942dcf0d6450311512da9f03f2d084.png" class="brand-icon">
+  <span></span>
+</button>
+    <button onclick="filter('MSI')">
+  <img src="https://tkcustomcomputer.com/assets/uploads/brands/b693bc73467a56addeb6392d84a02ca2.png" class="brand-icon">
+  <span></span>
+</button>
+  
+  
+  </div>
+  
+
+  <!-- CATEGORY -->
+  <div class="category">
+     <a href="homepage.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/c472584124c3515291d1e04f6723d4c1.png">
+    </a>
+      <p>laptop</p>
+    </div>
+    <a href="hardware.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/7e1ed178e5d9f9f0e0666af1cc42bd51.svg">
+    </a>
+      <p>Pc Hardware</p>
+    </div>
+    <a href="mouse.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/4c4b6269cf3ba46afeb3e57297674933.png">
+    </a>
+      <p>Mouse</p>
+    </div>
+    <a href="leptop.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/a71085979573d4812bc880df5eb68b65.svg">
+    </a>
+      <p>Accessories</p>
+    </div>
+    
+    <div class="">
+         <a href="" class="menu-item"></a>
+      
+      
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="products">
+    <div class="card" data-brand="toplink">
+      <a href ="1.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/2f9d773aa675a10884cc129aaa514363.jpg">
+      </a>
+      <h4>AX6600 Tri-Band Wi-Fi 6 Router ( Archer AX90 )</h4>
+      <p class="price">$249.00</p>
+    </div>
+    <div class="card" data-brand="toplink">
+       ​​<a href="2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/70a1a6b5ecbc5532e09591d2ae5bc8cc.jpg">
+      </a>
+      <h4>TP-Link Wifi 6 AX1500 Smart WiFi Router</h4>
+      <p class="price">$69.00</p>
+    </a>
+    </div>
+
+    <div class="card" data-brand="toplink">
+       <a href ="7.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/c4f7e0dc4e92aab4d87bd8c9bcb70a58.jpg">
+      </a>
+      <h3>TP-Link  AX5400 Dual-Band Gigabit Wi-Fi 6 Router</h3>
+      <p class="price">$99.00</p>
+    </div>
+ <div class="card" data-brand="toplink">
+  <a href ="3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/5e873b89739bbdd1ae36d11e80111f0a.png">
+      </a>
+      <h3>ADATA HD710 Pro </h3>
+   
+      <p class="price">$145.00</p>
+   
+    </div>
+
+    <div class="card" data-brand="toplink">
+      <a href ="4.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/f4e46bdadc91661159681f87efff73f1.png">
+      </a>
+      <h3>ADATA HD720 1TB USB 3.0</h3>
+      <p class="price">$75.00</p>
+    </div>
+
+    <div class="card" data-brand="adata">
+      <a href ="5.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/6d7550cd8c8204ff5964e8f54dff1f71.jpg">
+      </a>
+      <h3>Prolink PRO1501SFCU 1500VA/900W UPS</h3>
+      <p class="price">$109.00</p>
+    
+    </div>
+     <div class="card" data-brand="adata">
+      <a href="6.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/2891e84ad46af168547d0125d5b7a995.jpg">
+      </a>
+      <h3>ORICO HM14-80 Gold-plated Connectors</h3>
+      <p class="price">$8.00</p>
+    </div>
+
+
+    <div class="card" data-brand="lenovo">
+      <a href="ac1.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/d8ba857d456165c227000bee5f6920c0.png">
+      </a>
+      <h3>Lenovo IdeaPad</h3>
+      <p class="price">$900</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+
+  <div class="footer-box">
+    <h3>About</h3>
+    <p>Best laptop shop with quality and warranty.</p>
+  </div>
+
+  <div class="footer-box">
+    <h3>Contact</h3>
+    <p>Email: sasa@gmail.com</p>
+    <p>Phone: 012345678</p>
+  </div>
+
+  <div class="footer-box">
+    <h3>Follow Us</h3>
+    <div class="social">
+      <a href="#">Facebook</a>
+      <a href="#">YouTube</a>
+      <a href="#">Telegram</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function filter(brand){
+  let items = document.querySelectorAll(".card");
+
+  items.forEach(item=>{
+    if(brand === "all" || item.dataset.brand === brand){
+      item.style.display = "flex";
+    }else{
+      item.style.display = "none";
+    }
+    
+  });
+}
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function updateCart(){
+  let cartItems = document.getElementById("cart-items");
+  let count = document.getElementById("cart-count");
+
+  cartItems.innerHTML = "";
+  count.innerText = cart.length;
+
+  cart.forEach((item, index)=>{
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <p>${item.name}</p>
+        <p>$${item.price}</p>
+        <button onclick="removeItem(${index})">Remove</button>
+      </div>
+    `;
+  });
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function addToCart(name, price){
+  cart.push({name, price});
+  updateCart();
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  updateCart();
+}
+
+function openCart(){
+  document.getElementById("cartPopup").classList.add("active");
+}
+
+function closeCart(){
+  document.getElementById("cartPopup").classList.remove("active");
+}
+
+updateCart();
+</script>
+</script>
+
+</body>
+</html>

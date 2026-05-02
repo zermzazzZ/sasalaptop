@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MSI Product</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f5f5f5;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background:#111;
+    color:white;
+    padding:18px 40px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* PRODUCT */
+
+.product{
+    width:90%;
+    max-width:1200px;
+    margin:50px auto;
+    background:white;
+    border-radius:25px;
+    padding:40px;
+    display:flex;
+    gap:50px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* IMAGE */
+
+.product-image{
+    flex:1;
+    text-align:center;
+}
+
+.product-image img{
+    width:100%;
+    max-width:500px;
+    transition:0.3s;
+}
+
+.product-image img:hover{
+    transform:scale(1.05);
+}
+
+/* INFO */
+
+.product-info{
+    flex:1;
+}
+
+.product-info h1{
+    font-size:45px;
+    margin-bottom:20px;
+}
+
+.price{
+    color:orangered;
+    font-size:40px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+.spec{
+    font-size:20px;
+    line-height:2;
+    color:#333;
+}
+
+.buy{
+    margin-top:35px;
+}
+
+.buy button{
+    padding:15px 35px;
+    border:none;
+    border-radius:12px;
+    background:orange;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.buy button:hover{
+    background:#ff6600;
+    transform:translateY(-3px);
+}
+.cart-btn{
+    padding:15px 35px;
+    border:none;
+    border-radius:12px;
+    background:orange;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.cart-btn:hover{
+    background:#ff6600;
+    transform:translateY(-3px);
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    SA Laptop
+</div>
+
+<div class="product">
+
+    <div class="product-image">
+        <img src="https://tkcustomcomputer.com/assets/uploads/5631cf35baf12f530186a45eaabc37d8.jpg">
+    </div>
+
+    <div class="product-info">
+
+        <h1>Lenovo LOQ 15IRX10</h1>
+
+        <div class="price">
+          $1,899.00
+        </div>
+
+        <div class="spec">
+        
+- CPU : Intel® Core™ i7 14700HX (20Core/28Thread)<br>
+- RAM : 32GB (16GBx2) DDR5<br>
+- Storage : 512GB M.2 PCie<br>
+- Screen : 15.6" (1920x1080) IPS 100% sRGB, 144Hz<br>
+- VGA : NVIDIA® RTX™ 5050 4GB GDDR6<br>
+- Keyboard : 24Zone RGB Backlit<br>
+- OS : Windows 11 Home (64-bit)<br>
+- Battery : 4-cell, 60Whr<br>
+- Weight : 2.38kg | Color : Luna Grey<br>
+- 2Years Warranty<br>
+
+
+Upgrade Spec : <br>
+$1199  RAM 32GB | 512GB<br>
+$1259  RAM 32GB | 1TB <br>
+$1309  RAM 32GB | 1.5TB <br>
+
+------------------
+
+Free Item : <br>
+- Lenovo BACKPACK<br>
+- Wireless Mouse<br>
+- Screen Protector<br>
+- Mouse Pad<br>
+- Sreen Protector<br>
+- Flash 64GB<br>
+        </div>
+
+        <div class="buy">
+          <button class="addtocart.html" onclick="addToCart()">
+    Add To Cart
+</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function addToCart(){
+
+    alert("Added To Cart");
+
+    window.location.href = "addtocart.html";
+
+}
+
+</script>
+</body>
+</html>

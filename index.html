@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SASA Laptop Shop</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f5f5f5;
+}
+.products{
+    flex:1;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+    align-items:start;
+}
+
+.card{
+    background:white;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    transition:0.3s;
+    overflow:hidden;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.card-top{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.card img{
+    width:160px;
+    height:160px;
+    object-fit:contain;
+}
+
+.info{
+    flex:1;
+}
+
+.info h2{
+    font-size:34px;
+    margin-bottom:10px;
+    color:#111;
+}
+
+.spec{
+    color:#666;
+    line-height:1.8;
+    font-size:18px;
+}
+
+.price{
+    color:orangered;
+    font-size:38px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+.btn-box{
+    display:flex;
+    gap:15px;
+    margin-top:25px;
+}
+
+.btn{
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.buy{
+    background:orange;
+    color:white;
+}
+
+.cart{
+    background:#111;
+    color:white;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+}
+/* NAVBAR */
+.navbar{
+  background:#111;
+  color:white;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.head{
+  display:flex;
+  gap:15px;
+}
+
+.head a{
+  text-decoration:none;
+  color:white;
+  padding:6px 12px;
+  border-radius:6px;
+}
+
+.head a:hover{
+  background:#ff6600;
+}
+
+/* MAIN LAYOUT */
+.main{
+  display:grid;
+  grid-template-columns: 220px 120px 1fr;
+  gap:20px;
+  padding:20px;
+}
+
+/* SIDEBAR */
+.sidebar{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+}
+
+.sidebar button{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:10px;
+  border:none;
+  background:#eee;
+  cursor:pointer;
+  border-radius:6px;
+  text-align:left;
+}
+
+.sidebar button:hover{
+  background:#ffffff;
+  color:white;
+}
+
+/* CATEGORY */
+.category{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.cart-box{
+  background:white;
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+  border:2px solid #ddd;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.cart-box:hover{
+  border-color:#ff6600;
+}
+
+.cart-box img{
+  width:40px;
+}
+
+.cart-box p{
+  margin:5px 0 0;
+}
+
+/* PRODUCTS */
+.products{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+    padding:20px;
+}
+
+.card{
+    width:280px;
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.card a{
+    text-decoration:none;
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:contain;
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.card img:hover{
+    transform:scale(1.05);
+}
+
+.card h4{
+    font-size:20px;
+    margin:15px 0;
+    color:#111;
+}
+
+.price{
+    color:orangered;
+    font-size:25px;
+    font-weight:bold;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:10px;
+  padding:8px;
+  border:none;
+  background:#ff6600;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.btn:hover{
+  background:#e65c00;
+}
+
+/* FOOTER */
+.footer{
+  background:#111;
+  color:white;
+  display:flex;
+  justify-content:space-around;
+  padding:40px 20px;
+  margin-top:50px;
+}
+
+.footer-box{
+  max-width:250px;
+}
+
+.footer p{
+  color:#ccc;
+}
+
+.social a{
+  display:block;
+  color:#ccc;
+  text-decoration:none;
+  margin:5px 0;
+}
+
+.social a:hover{
+  color:#ffffff;
+}
+/* CART ICON */
+.cart-icon{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#ff6600;
+  color:white;
+  padding:10px 15px;
+  border-radius:30px;
+  cursor:pointer;
+  z-index:1000;
+}
+
+#cart-count{
+  background:white;
+  color:black;
+  padding:2px 6px;
+  border-radius:50%;
+  margin-left:5px;
+}
+
+/* POPUP */
+.cart-popup{
+  position:fixed;
+  right:-400px;
+  top:0;
+  width:300px;
+  height:100%;
+  background:white;
+  box-shadow:-5px 0 15px rgba(0,0,0,0.2);
+  padding:20px;
+  transition:0.4s;
+  z-index:999;
+}
+
+.cart-popup.active{
+  right:0;
+}
+
+.cart-item{
+  border-bottom:1px solid #ddd;
+  padding:10px 0;
+}
+
+.cart-item button{
+  background:red;
+  color:white;
+  border:none;
+  padding:5px 8px;
+  cursor:pointer;
+}
+.brand-icon {
+  width: 100px;
+  height: 35px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.brand:hover{
+    blackground: color : black;
+}
+.banner{
+  width:100%;
+  height:250px;
+  overflow:hidden;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+.banner video,
+.banner iframe{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h2>SA Laptop </h2>
+
+  <div class="head">
+    <a href="profile.html">Join</a>
+    <a href="#">Sign Up</a>
+  </div>
+</div>
+
+
+<!-- CART POPUP -->
+<div class="cart-popup" id="cartPopup">
+  <h3>Your Cart</h3>
+  <div id="cart-items"></div>
+  <button onclick="closeCart()">Close</button>
+</div>
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <h3>Brand</h3>
+    <button onclick="filter('asus')">
+  <img src="data:image/png;base64,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" class="brand-icon">
+  <span></span>
+</button>
+
+    <button onclick="filter('MSI')">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2dokcNdTCmREgcG2Hj8OXGDTU_hCU9l_jPw&s" class="brand-icon">
+  <span></span>
+</button>
+<button onclick="filter('lenovo')">
+  <img src="data:image/png;base64,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" class="brand-icon">
+  <span></span>
+</button>
+
+</button>
+    <button onclick="filter('acer')">
+  <img src="https://img-cache.coccoc.com/image2?i=1&l=8/345066154" class="brand-icon">
+  <span></span>
+  
+  </div>
+  
+
+  <!-- CATEGORY -->
+  <div class="category">
+     <a href="homepage.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/c472584124c3515291d1e04f6723d4c1.png">
+    </a>
+      <p>laptop</p>
+    </div>
+    <a href="hardware.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/7e1ed178e5d9f9f0e0666af1cc42bd51.svg">
+    </a>
+      <p>Pc Hardware</p>
+    </div>
+    <a href="mouse.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/4c4b6269cf3ba46afeb3e57297674933.png">
+    </a>
+      <p>Mouse</p>
+    </div>
+    <a href="leptop.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/a71085979573d4812bc880df5eb68b65.svg">
+    </a>
+      <p>Accessories</p>
+    </div>
+    
+    <div class="">
+         <a href="" class="menu-item"></a>
+      <img src="">
+      <p></p>
+
+      
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="products">
+    <div class="card" data-brand="asus">
+      <a href ="msi1.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/3a4953856b8fa336d49efcecab0c33ba.jpg">
+      </a>
+      <h3>MSI Cyborg 15 A13UC-2067KH</h3>
+      <p class="price">$719.99</p>
+    </div>
+    <div class="card" data-brand="MSI">
+       ​​<a href="msicyborg.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/bfbc5e17803f44d46ace7179033d989e.jpg">
+      </a>
+      <h4>MSI Cyborg 15 B13WEKG - 875KH & 621KHNN</h4>
+      <p class="price">$1,079.00</p>
+    </a>
+    </div>
+
+    <div class="card" data-brand="MSI">
+       <a href ="msi33.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/2688e84a3c760f1d19fb544133347874.jpg">
+      </a>
+      <h3>MSI Cyborg 15 A13UC-2440KH</h3>
+      <p class="price">$899.00</p>
+    </div>
+ <div class="card" data-brand="MSI">
+  <a href ="msi2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/ebcb7a94adf6f71ff6004775342d0be4.jpg">
+      </a>
+      <h3>MSI Summit 13 AI+ Evo A2VMTG-037KH</h3>
+      <p class="price">$1200</p>
+    </div>
+
+    <div class="card" data-brand="asus">
+      <a href ="asua1.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/8ee0d786699636bbd8e18778764b02e9.jpg">
+      </a>
+      <h3>ASUS VIVOBOOK X1404TA-EB045W</h3>
+      <p class="price">$339.00</p>
+    </div>
+
+    <div class="card" data-brand="asus">
+      <a href="asus2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/78b831d5027d588b713631ceebf0d9d1.jpg">
+      </a>
+      <h3>ASUS Gaming V16 V3607VJ</h3>
+    
+      <p class="price">$799.00</p>
+     
+    </div>
+     <div class="card" data-brand="asus">
+      <a href ="asus3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/8cc743f17169064dc1cd2c415b98e200.jpg">
+      </a>
+      <h3>ASUS ROG G615JHR</h3>
+      <p class="price">$1,549.00</p>
+    </div>
+
+    <div class="card" data-brand="msi">
+      <a href="asus4.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/0fbcb67f351e6b499acde2bf7a672352.jpg">
+    </a>
+      <h3>ASUS ROG Flow Z13</h3>
+      <p class="price">$2,499.00</p>
+    
+    </div>
+
+    <div class="card" data-brand="asus">
+      <a href="asus5.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/3fdca0142ec709fd58610c40c70fa242.jpg">
+      </a>
+      <h3>ASUS Zephyrus GA403WM</h3>
+      <p class="price">$1,899.00</p>
+    </div>
+
+     <div class="card" data-brand="lenovo">
+      <a href ="lenovo.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/eac9bc0faf66a2e6d63adcb84afb096a.jpg">
+      </a>
+      <h3>IdeaPad Slim 3 15AMN8</h3>
+      <p class="price">$599.00</p>
+    </div>
+
+    <div class="card" data-brand="lenovo">
+      <a href="len1.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/5631cf35baf12f530186a45eaabc37d8.jpg">
+      </a>
+      <h3>Lenovo LOQ 15IRX10</h3>
+      <p class="price">$1,199.00</p>
+
+    </div>
+
+    <div class="card" data-brand="lenovo">
+      <a href="len2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/31697490b56fa50b4981501f8fbf55b4.jpg">
+      </a>
+      <h3>Lenovo IdeaPad</h3>
+      <p class="price">$1,199.00</p>
+    </div>
+
+      <div class="card" data-brand="asus">
+        <a href="len2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/8ee0d786699636bbd8e18778764b02e9.jpg">
+      </a>
+      <h3>ASUS ROG</h3>
+      <p class="price">$$1,199.00</p>
+
+    </div>
+
+    <div class="card" data-brand="msi">
+      <a href="len3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/e2d689fd2e1973015c00b3f8fce7d9c8.jpg">
+      </a>
+      <h3>MSI Gaming</h3>
+      <p class="price">$1100</p>
+    </div>
+
+    <div class="card" data-brand="lenovo">
+      <a href="len4.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/609bcf16c73ea45f620c39ec796cc7b2.jpg">
+      </a>
+      <h3>Lenovo IdeaPad</h3>
+      <p class="price">$900</p>
+    
+    </div>
+ <div class="card" data-brand="msi">
+  <a href="msi3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/d65340d7a6c451b5f93d39287ec284fb.jpg">
+      </a>
+      <h3>ASUS ROG</h3>
+      <p class="price">$1200</p>
+    </div>
+
+    <div class="card" data-brand="msi">
+      <a href="msi4.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/17954c7189bc079d9acb06306a2b6dd9.jpg">
+      </a>
+      <h3>ASUS ProArt P16</h3>
+      <p class="price">$4,999.00</p>
+    </div>
+
+    <div class="card" data-brand="lenovo">
+      <a href="msi5.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/ed49e756e8403b9c6f33fb60fece14ee.jpg">
+      </a>
+      <h3>ASUS ROG G815LR-S9177W</h3>
+      <p class="price">$2,399.00</p>
+    </div>
+     <div class="card" data-brand="asus">
+      <a href="c1.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/006383cbcb6d2eb929ddc39eefba686b.jpg">
+      </a>
+      <h3>IdeaCentre AIO 3 22IAP7</h3>
+      <p class="price">$589.00</p>
+    </div>
+
+    <div class="card" data-brand="asus">
+      <a href="c2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/6d3119eb3c603ccf6defe2a07976524f.jpg">
+      </a>
+      <h3>ThinkCentre Neo 30A 24" (AIO) </h3>
+   
+      <p class="price">$639.00</p>
+    </div>
+
+    <div class="card" data-brand="asus">
+      <a href="c3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/d6cefca7bcc067fa63db1637ed53c2b8.jpeg">
+      </a>
+      <h3>IdeaCentre AIO 3 24IAP7</h3>
+   
+      <p class="price">$799.00</p>
+     
+    </div>
+     <div class="card" data-brand="acer">
+      <a href="acer1.html">
+      <img src="https://m.media-amazon.com/images/I/71NoF2JV5oL._AC_SL1500_.jpg">
+      </a>
+      <h3>acer Aspire 16 AI</h3>
+      <p class="price">$699.99 </p>
+    </div>
+
+    <div class="card" data-brand="acer">
+      <a href="acer2.html">
+      <img src="https://m.media-amazon.com/images/I/71gXelI8upL._AC_UF480,480_SR480,480_.jpg">
+      </a>
+      <h3>acer Nitro V Gaming Laptop</h3>
+      <p class="price">$799.99 </p>
+    </div>
+
+    <div class="card" data-brand="acer">
+      <a href="acer2.html">
+      <img src="https://m.media-amazon.com/images/I/71gXelI8upL._AC_UF480,480_SR480,480_.jpg">
+      </a>
+      <h3>acer Nitro V Gaming Laptop</h3>
+      <p class="price">$799.99 </p>
+    </div>
+
+    <div class="card" data-brand="msi">
+      <img src="https://tkcustomcomputer.com/assets/uploads/99df86f6e25ce4b0295780bd8635b38d.jpg">
+      <h3>MSI Gaming</h3>
+      <h4>CPU: Intel N150 | RAM: 8GB | Storage: 256GB</h4>
+      <p class="price">$1100</p>
+      <button class="btn">Add</button>
+    </div>
+     <div class="card" data-brand="asus">
+      <a href="c3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/d6cefca7bcc067fa63db1637ed53c2b8.jpeg">
+      </a>
+      <h3>IdeaCentre AIO 3 24IAP7</h3>
+   
+      <p class="price">$799.00</p>
+     
+    </div>
+     <div class="card" data-brand="acer">
+      <a href="acer1.html">
+      <img src="https://m.media-amazon.com/images/I/71NoF2JV5oL._AC_SL1500_.jpg">
+      </a>
+      <h3>acer Aspire 16 AI</h3>
+      <p class="price">$699.99 </p>
+    </div>
+
+     <div class="card" data-brand="MSI">
+       ​​<a href="msicyborg.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/bfbc5e17803f44d46ace7179033d989e.jpg">
+      </a>
+      <h4>MSI Cyborg 15 B13WEKG - 875KH & 621KHNN</h4>
+      <p class="price">$1,079.00</p>
+    </a>
+    </div>
+
+    <div class="card" data-brand="MSI">
+       <a href ="msi33.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/2688e84a3c760f1d19fb544133347874.jpg">
+      </a>
+      <h3>MSI Cyborg 15 A13UC-2440KH</h3>
+      <p class="price">$899.00</p>
+    </div>
+ <div class="card" data-brand="MSI">
+  <a href ="msi2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/ebcb7a94adf6f71ff6004775342d0be4.jpg">
+      </a>
+      <h3>MSI Summit 13 AI+ Evo A2VMTG-037KH</h3>
+      <p class="price">$1200</p>
+    </div>
+
+    
+    <div class="card" data-brand="asus">
+      <a href ="asua1.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/8ee0d786699636bbd8e18778764b02e9.jpg">
+      </a>
+      <h3>ASUS VIVOBOOK X1404TA-EB045W</h3>
+      <p class="price">$339.00</p>
+    </div>
+
+    <div class="card" data-brand="asus">
+      <a href="asus2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/78b831d5027d588b713631ceebf0d9d1.jpg">
+      </a>
+      <h3>ASUS Gaming V16 V3607VJ</h3>
+    
+      <p class="price">$799.00</p>
+     
+    </div>
+     <div class="card" data-brand="asus">
+      <a href ="asus3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/8cc743f17169064dc1cd2c415b98e200.jpg">
+      </a>
+      <h3>ASUS ROG G615JHR</h3>
+      <p class="price">$1,549.00</p>
+    </div>
+
+    <div class="card" data-brand="msi">
+      <a href="asus4.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/0fbcb67f351e6b499acde2bf7a672352.jpg">
+    </a>
+      <h3>ASUS ROG Flow Z13</h3>
+      <p class="price">$2,499.00</p>
+    
+    </div>
+
+    <div class="card" data-brand="asus">
+      <a href="asus5.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/3fdca0142ec709fd58610c40c70fa242.jpg">
+      </a>
+      <h3>ASUS Zephyrus GA403WM</h3>
+      <p class="price">$1,899.00</p>
+    </div>
+
+     <div class="card" data-brand="lenovo">
+      <a href ="lenovo.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/eac9bc0faf66a2e6d63adcb84afb096a.jpg">
+      </a>
+      <h3>IdeaPad Slim 3 15AMN8</h3>
+      <p class="price">$599.00</p>
+    </div>
+
+    <div class="card" data-brand="lenovo">
+      <a href="len1.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/5631cf35baf12f530186a45eaabc37d8.jpg">
+      </a>
+      <h3>Lenovo LOQ 15IRX10</h3>
+      <p class="price">$1,199.00</p>
+
+    </div>
+
+    <div class="card" data-brand="lenovo">
+      <a href="len2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/31697490b56fa50b4981501f8fbf55b4.jpg">
+      </a>
+      <h3>Lenovo IdeaPad</h3>
+      <p class="price">$1,199.00</p>
+    </div>
+
+      <div class="card" data-brand="asus">
+        <a href="len2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/8ee0d786699636bbd8e18778764b02e9.jpg">
+      </a>
+      <h3>ASUS ROG</h3>
+      <p class="price">$$1,199.00</p>
+
+    </div>
+
+    <div class="card" data-brand="msi">
+      <a href="len3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/e2d689fd2e1973015c00b3f8fce7d9c8.jpg">
+      </a>
+      <h3>MSI Gaming</h3>
+      <p class="price">$1100</p>
+    </div>
+
+    <div class="card" data-brand="lenovo">
+      <a href="len4.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/609bcf16c73ea45f620c39ec796cc7b2.jpg">
+      </a>
+      <h3>Lenovo IdeaPad</h3>
+      <p class="price">$900</p>
+    
+    </div>
+ <div class="card" data-brand="msi">
+  <a href="msi3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/d65340d7a6c451b5f93d39287ec284fb.jpg">
+      </a>
+      <h3>ASUS ROG</h3>
+      <p class="price">$1200</p>
+    </div>
+
+    <div class="card" data-brand="msi">
+      <a href="msi4.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/17954c7189bc079d9acb06306a2b6dd9.jpg">
+      </a>
+      <h3>ASUS ProArt P16</h3>
+      <p class="price">$4,999.00</p>
+    </div>
+
+    <div class="card" data-brand="lenovo">
+      <a href="msi5.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/ed49e756e8403b9c6f33fb60fece14ee.jpg">
+      </a>
+      <h3>ASUS ROG G815LR-S9177W</h3>
+      <p class="price">$2,399.00</p>
+    </div>
+     <div class="card" data-brand="asus">
+      <a href="c1.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/006383cbcb6d2eb929ddc39eefba686b.jpg">
+      </a>
+      <h3>IdeaCentre AIO 3 22IAP7</h3>
+      <p class="price">$589.00</p>
+    </div>
+
+    <div class="card" data-brand="asus">
+      <a href="c2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/6d3119eb3c603ccf6defe2a07976524f.jpg">
+      </a>
+      <h3>ThinkCentre Neo 30A 24" (AIO) </h3>
+   
+      <p class="price">$639.00</p>
+    </div>
+
+    <div class="card" data-brand="asus">
+      <a href="c3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/d6cefca7bcc067fa63db1637ed53c2b8.jpeg">
+      </a>
+      <h3>IdeaCentre AIO 3 24IAP7</h3>
+   
+      <p class="price">$799.00</p>
+     
+    </div>
+     <div class="card" data-brand="acer">
+      <a href="acer1.html">
+      <img src="https://m.media-amazon.com/images/I/71NoF2JV5oL._AC_SL1500_.jpg">
+      </a>
+      <h3>acer Aspire 16 AI</h3>
+      <p class="price">$699.99 </p>
+    </div>
+
+    <div class="card" data-brand="acer">
+      <a href="acer2.html">
+      <img src="https://m.media-amazon.com/images/I/71gXelI8upL._AC_UF480,480_SR480,480_.jpg">
+      </a>
+      <h3>acer Nitro V Gaming Laptop</h3>
+      <p class="price">$799.99 </p>
+    </div>
+
+    <div class="card" data-brand="acer">
+      <a href="acer2.html">
+      <img src="https://m.media-amazon.com/images/I/71gXelI8upL._AC_UF480,480_SR480,480_.jpg">
+      </a>
+      <h3>acer Nitro V Gaming Laptop</h3>
+      <p class="price">$799.99 </p>
+    </div>
+
+    <div class="card" data-brand="msi">
+      <img src="https://tkcustomcomputer.com/assets/uploads/99df86f6e25ce4b0295780bd8635b38d.jpg">
+      <h3>MSI Gaming</h3>
+      <h4>CPU: Intel N150 | RAM: 8GB | Storage: 256GB</h4>
+      <p class="price">$1100</p>
+      <button class="btn">Add</button>
+    </div>
+     <div class="card" data-brand="asus">
+      <a href="c3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/d6cefca7bcc067fa63db1637ed53c2b8.jpeg">
+      </a>
+      <h3>IdeaCentre AIO 3 24IAP7</h3>
+   
+      <p class="price">$799.00</p>
+     
+    </div>
+     <div class="card" data-brand="acer">
+      <a href="acer1.html">
+      <img src="https://m.media-amazon.com/images/I/71NoF2JV5oL._AC_SL1500_.jpg">
+      </a>
+      <h3>acer Aspire 16 AI</h3>
+      <p class="price">$699.99 </p>
+    </div>
+
+     <div class="card" data-brand="MSI">
+       ​​<a href="msicyborg.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/bfbc5e17803f44d46ace7179033d989e.jpg">
+      </a>
+      <h4>MSI Cyborg 15 B13WEKG - 875KH & 621KHNN</h4>
+      <p class="price">$1,079.00</p>
+    </a>
+    </div>
+
+    <div class="card" data-brand="MSI">
+       <a href ="msi33.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/2688e84a3c760f1d19fb544133347874.jpg">
+      </a>
+      <h3>MSI Cyborg 15 A13UC-2440KH</h3>
+      <p class="price">$899.00</p>
+    </div>
+ <div class="card" data-brand="MSI">
+  <a href ="msi2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/ebcb7a94adf6f71ff6004775342d0be4.jpg">
+      </a>
+      <h3>MSI Summit 13 AI+ Evo A2VMTG-037KH</h3>
+      <p class="price">$1200</p>
+    </div>
+
+
+
+    <div class="card" data-brand="lenovo">
+      <a href="len5.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/31697490b56fa50b4981501f8fbf55b4.jpg">
+      </a>
+      <h3>Lenovo IdeaPad</h3>
+      <p class="price">$900</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+
+  <div class="footer-box">
+    <h3>About</h3>
+    <p>Best laptop shop with quality and warranty.</p>
+  </div>
+
+  <div class="footer-box">
+    <h3>Contact</h3>
+    <p>Email: sasa@gmail.com</p>
+    <p>Phone: 012345678</p>
+  </div>
+
+  <div class="footer-box">
+    <h3>Follow Us</h3>
+    <div class="social">
+      <a href="#">Facebook</a>
+      <a href="#">YouTube</a>
+      <a href="#">Telegram</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function filter(brand){
+  let items = document.querySelectorAll(".card");
+
+  items.forEach(item=>{
+    if(brand === "all" || item.dataset.brand === brand){
+      item.style.display = "flex";
+    }else{
+      item.style.display = "none";
+    }
+    
+  });
+}
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function updateCart(){
+  let cartItems = document.getElementById("cart-items");
+  let count = document.getElementById("cart-count");
+
+  cartItems.innerHTML = "";
+  count.innerText = cart.length;
+
+  cart.forEach((item, index)=>{
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <p>${item.name}</p>
+        <p>$${item.price}</p>
+        <button onclick="removeItem(${index})">Remove</button>
+      </div>
+    `;
+  });
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function addToCart(name, price){
+  cart.push({name, price});
+  updateCart();
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  updateCart();
+}
+
+function openCart(){
+  document.getElementById("cartPopup").classList.add("active");
+}
+
+function closeCart(){
+  document.getElementById("cartPopup").classList.remove("active");
+}
+
+updateCart();
+</script>
+</script>
+
+</body>
+</html>

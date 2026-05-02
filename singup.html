@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#0f0f0f;
+  color:white;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#000000,#000000);
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+header h2{
+  font-size:20px;
+}
+
+header input{
+  flex:1;
+  min-width:200px;
+  padding:10px 15px;
+  border:none;
+  border-radius:25px;
+  outline:none;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  position:fixed;
+  top:15px;
+  left:15px;
+  background:#1a1a1a;
+  padding:8px 15px;
+  border-radius:25px;
+  color:white;
+  text-decoration:none;
+  transition:0.3s;
+  z-index:1000;
+}
+
+.back-btn:hover{
+  background:#fff9f7;
+}
+
+/* LAYOUT */
+.container{
+  display:flex;
+  padding:20px;
+  gap:20px;
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:240px;
+  background:#1a1a1a;
+  padding:20px;
+  border-radius:15px;
+}
+
+.sidebar h3{
+  margin-bottom:15px;
+}
+
+.sidebar a{
+  display:block;
+  padding:10px;
+  margin-bottom:8px;
+  border-radius:8px;
+  color:#bbb;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.sidebar a:hover{
+  background:#ffefec;
+  color:white;
+}
+
+/* MAIN */
+.main{
+  flex:1;
+  background:#1c1c1c;
+  padding:20px;
+  border-radius:15px;
+}
+
+/* FORM */
+.form-group{
+  margin-bottom:15px;
+}
+
+label{
+  font-size:13px;
+  color:#aaa;
+}
+
+input,select{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid transparent;
+  margin-top:5px;
+  background:#2a2a2a;
+  color:white;
+}
+
+input:focus,select:focus{
+  border:1px solid #ee4d2d;
+}
+
+/* PROFILE IMAGE */
+.profile-img{
+  text-align:center;
+}
+
+.profile-img img{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  border:3px solid #ffe6e1;
+  object-fit:cover;
+}
+
+/* BUTTON */
+button{
+  background:linear-gradient(135deg,#000000,#000000);
+  border:none;
+  padding:10px 20px;
+  border-radius:25px;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+/* FLEX FIX */
+.row{
+  display:flex;
+  gap:30px;
+  margin-top:20px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .container{
+    flex-direction:column;
+  }
+
+  .sidebar{
+    width:100%;
+  }
+
+  .row{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<a href="homepage.html" class="back-btn">🔙 Back</a>
+
+<header>
+  <h2>🛒 SASA Shop</h2>
+  <input placeholder="🔍 Search...">
+</header>
+
+<div class="container">
+
+  <div class="sidebar">
+    <h3>👤 Username</h3>
+    <a href="#">📄 Profile</a>
+    <a href="#">🏦 Banks</a>
+    <a href="#">📍 Address</a>
+    <a href="#">🔒 Change Password</a>
+    <a href="#">🔔 Notifications</a>
+  </div>
+
+  <div class="main">
+    <h2>My Profile</h2>
+    <p style="color:#aaa;">Manage your account</p>
+
+    <div class="row">
+
+      <div style="flex:1;">
+        <div class="form-group">
+          <label>Username</label>
+          <input value="user123">
+        </div>
+
+        <div class="form-group">
+          <label>Name</label>
+          <input placeholder="Your name">
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input placeholder="email@gmail.com">
+        </div>
+
+        <div class="form-group">
+          <label>Phone</label>
+          <input placeholder="012345678">
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <select>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date">
+        </div>
+
+        <button onclick="save()">💾 Save</button>
+      </div>
+
+      <div class="profile-img">
+        <img id="preview" src="https://via.placeholder.com/100">
+        <p style="color:#aaa;">Select Image</p>
+        <input type="file" onchange="previewImg(event)">
+
+</div>
+
+<script>
+function save(){
+  alert("Saved successfully ✅");
+}
+
+function previewImg(event){
+  let img = document.getElementById("preview");
+  img.src = URL.createObjectURL(event.target.files[0]);
+}
+</script>
+
+</body>
+</html>

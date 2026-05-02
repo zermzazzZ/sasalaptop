@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MSI Product PRO</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:
+linear-gradient(135deg,#f8f9ff,#eef2ff);
+min-height:100vh;
+padding:40px;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:#111;
+padding:18px 40px;
+border-radius:22px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
+margin-bottom:40px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.logo{
+font-size:30px;
+font-weight:800;
+}
+
+.cart-icon{
+position:relative;
+font-size:28px;
+cursor:pointer;
+}
+
+.cart-count{
+position:absolute;
+top:-10px;
+right:-10px;
+width:25px;
+height:25px;
+border-radius:50%;
+background:orangered;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:13px;
+font-weight:bold;
+}
+
+/* PRODUCT */
+
+.product{
+max-width:1300px;
+margin:auto;
+background:white;
+border-radius:35px;
+padding:45px;
+display:flex;
+gap:50px;
+box-shadow:
+0 20px 50px rgba(0,0,0,0.08);
+}
+
+/* IMAGE */
+
+.product-image{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+position:relative;
+}
+
+.product-image img{
+width:100%;
+max-width:320px;
+transition:0.4s;
+filter:drop-shadow(0 20px 30px rgba(0,0,0,0.2));
+}
+
+.product-image img:hover{
+transform:scale(1.05) rotate(-2deg);
+}
+
+/* BADGE */
+
+.badge{
+position:absolute;
+top:10px;
+left:10px;
+padding:10px 18px;
+background:linear-gradient(135deg,#ff6600,#ff0055);
+color:white;
+font-weight:700;
+border-radius:999px;
+font-size:14px;
+box-shadow:0 10px 20px rgba(255,90,0,0.2);
+}
+
+/* INFO */
+
+.product-info{
+flex:1;
+}
+
+.brand{
+color:orangered;
+font-weight:700;
+font-size:15px;
+letter-spacing:2px;
+margin-bottom:10px;
+}
+
+.product-info h1{
+font-size:52px;
+line-height:1.1;
+margin-bottom:20px;
+}
+
+.rating{
+margin-bottom:18px;
+font-size:18px;
+color:#ffaa00;
+font-weight:600;
+}
+
+.price{
+font-size:50px;
+font-weight:800;
+color:#ff5500;
+margin-bottom:25px;
+}
+
+.old-price{
+font-size:24px;
+color:#999;
+text-decoration:line-through;
+margin-left:10px;
+}
+
+/* SPEC */
+
+.spec{
+background:#f8f9ff;
+padding:25px;
+border-radius:22px;
+line-height:2;
+font-size:18px;
+color:#444;
+margin-bottom:30px;
+}
+
+/* BUTTONS */
+
+.actions{
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
+
+.add-btn{
+flex:1;
+padding:18px;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#ff6600,#ff0055);
+color:white;
+font-size:20px;
+font-weight:700;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 15px 30px rgba(255,80,0,0.2);
+}
+
+.add-btn:hover{
+transform:translateY(-4px) scale(1.02);
+}
+
+.buy-btn{
+flex:1;
+padding:18px;
+border:none;
+border-radius:18px;
+background:#111;
+color:white;
+font-size:20px;
+font-weight:700;
+cursor:pointer;
+transition:0.3s;
+}
+
+.buy-btn:hover{
+transform:translateY(-4px);
+background:#222;
+}
+
+/* SUCCESS */
+
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.5);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.popup-box{
+background:white;
+padding:40px;
+border-radius:30px;
+text-align:center;
+width:400px;
+max-width:95%;
+animation:show .3s ease;
+}
+
+@keyframes show{
+from{
+transform:scale(.7);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.popup-box h2{
+font-size:35px;
+margin-bottom:10px;
+}
+
+.popup-box p{
+color:#666;
+margin-bottom:25px;
+}
+
+.popup-box button{
+padding:14px 24px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#ff6600,#ff0055);
+color:white;
+font-weight:700;
+cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.product{
+flex-direction:column;
+padding:25px;
+}
+
+.product-info h1{
+font-size:38px;
+}
+
+.price{
+font-size:40px;
+}
+
+body{
+padding:15px;
+}
+
+.navbar{
+padding:15px 20px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div class="logo">
+🔥 SASA SHOP
+</div>
+
+<div class="cart-icon" onclick="goCart()">
+🛒
+<div class="cart-count" id="cartCount">
+0
+</div>
+</div>
+
+</div>
+
+<!-- PRODUCT -->
+
+<div class="product">
+
+<div class="product-image">
+
+<div class="">
+
+</div>
+
+<img src="https://tkcustomcomputer.com/assets/uploads/709365e672fc02bb2e9a01ecb8e95313.jpg">
+
+</div>
+
+<div class="product-info">
+
+<div class="brand">
+Razer Cobra 
+</div>
+
+<h1>
+Razer Cobra : 58g, Gen-3 Optical Switches
+</h1>
+
+<div class="rating">
+⭐⭐⭐⭐⭐ (4.9 Reviews)
+</div>
+
+<div class="price">
+$$45.00
+<span class="old-price">
+$$49.00
+</span>
+</div>
+
+<div class="spec">
+- CPU : Intel® Core™ i5-13420H (8C,12Th)<br>
+- RAM : 8GB DDR5<br>
+- Storage : 512GB M.2 <br>
+- Screen : 15.6"" FHD (1920*1080),  144Hz<br>
+- VGA : NVIDIA® RTX™ 3050 GDDR6 4GB<br>
+- Keyboard : Blue Lightv<br>
+- OS : Window 11 Home License 64Bit<br>
+- Battery : 4-Cell 53.5Whr <br>
+- Weight : 1.98 kg | Color : Translucent Black<br>
+</div>
+
+<div class="actions">
+
+<button class="add-btn" onclick="addToCart()">
+🛒 Add To Cart
+</button>
+
+<button class="buy-btn" onclick="buyNow()">
+⚡ Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- POPUP -->
+
+<div class="popup" id="popup">
+
+<div class="popup-box">
+
+<h2>
+✅ Add
+</h2>
+
+<p>
+Product added to cart successfully
+</p>
+
+<button onclick="closePopup()">
+Continue Shopping
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* CART COUNT */
+
+function updateCartCount(){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+document.getElementById("cartCount").innerText =
+cart.length;
+
+}
+
+/* ADD TO CART */
+
+function addToCart(){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let product = {
+
+name:"MSI Cyborg 15",
+
+price:45.00,
+
+img:"https://tkcustomcomputer.com/assets/uploads/709365e672fc02bb2e9a01ecb8e95313.jpg"
+
+};
+
+cart.push(product);
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+updateCartCount();
+
+document.getElementById("popup").style.display = "flex";
+
+}
+
+/* BUY NOW */
+
+function buyNow(){
+
+addToCart();
+
+setTimeout(()=>{
+
+window.location.href = "addtocart.html";
+
+},500);
+
+}
+
+/* CLOSE POPUP */
+
+function closePopup(){
+
+document.getElementById("popup").style.display = "none";
+
+}
+
+/* GO CART */
+
+function goCart(){
+
+window.location.href = "addtocart.html";
+
+}
+
+/* START */
+
+updateCartCount();
+
+</script>
+
+</body>
+</html>

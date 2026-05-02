@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SASA Laptop Shop</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f5f5f5;
+}
+.products{
+    flex:1;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+    align-items:start;
+}
+
+.card{
+    background:white;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    transition:0.3s;
+    overflow:hidden;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.card-top{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.card img{
+    width:160px;
+    height:160px;
+    object-fit:contain;
+}
+
+.info{
+    flex:1;
+}
+
+.info h2{
+    font-size:34px;
+    margin-bottom:10px;
+    color:#111;
+}
+
+.spec{
+    color:#666;
+    line-height:1.8;
+    font-size:18px;
+}
+
+.price{
+    color:orangered;
+    font-size:38px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+.btn-box{
+    display:flex;
+    gap:15px;
+    margin-top:25px;
+}
+
+.btn{
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.buy{
+    background:orange;
+    color:white;
+}
+
+.cart{
+    background:#111;
+    color:white;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+}
+/* NAVBAR */
+.navbar{
+  background:#111;
+  color:white;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.head{
+  display:flex;
+  gap:15px;
+}
+
+.head a{
+  text-decoration:none;
+  color:white;
+  padding:6px 12px;
+  border-radius:6px;
+}
+
+.head a:hover{
+  background:#ff6600;
+}
+
+/* MAIN LAYOUT */
+.main{
+  display:grid;
+  grid-template-columns: 220px 120px 1fr;
+  gap:20px;
+  padding:20px;
+}
+
+/* SIDEBAR */
+.sidebar{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+}
+
+.sidebar button{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:10px;
+  border:none;
+  background:#eee;
+  cursor:pointer;
+  border-radius:6px;
+  text-align:left;
+}
+
+.sidebar button:hover{
+  background:#ffffff;
+  color:white;
+}
+
+/* CATEGORY */
+.category{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.cart-box{
+  background:white;
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+  border:2px solid #ddd;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.cart-box:hover{
+  border-color:#ff6600;
+}
+
+.cart-box img{
+  width:40px;
+}
+
+.cart-box p{
+  margin:5px 0 0;
+}
+
+/* PRODUCTS */
+.products{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+    padding:20px;
+}
+
+.card{
+    width:280px;
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.card a{
+    text-decoration:none;
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:contain;
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.card img:hover{
+    transform:scale(1.05);
+}
+
+.card h4{
+    font-size:20px;
+    margin:15px 0;
+    color:#111;
+}
+
+.price{
+    color:orangered;
+    font-size:25px;
+    font-weight:bold;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:10px;
+  padding:8px;
+  border:none;
+  background:#ff6600;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.btn:hover{
+  background:#e65c00;
+}
+
+/* FOOTER */
+.footer{
+  background:#111;
+  color:white;
+  display:flex;
+  justify-content:space-around;
+  padding:40px 20px;
+  margin-top:50px;
+}
+
+.footer-box{
+  max-width:250px;
+}
+
+.footer p{
+  color:#ccc;
+}
+
+.social a{
+  display:block;
+  color:#ccc;
+  text-decoration:none;
+  margin:5px 0;
+}
+
+.social a:hover{
+  color:#ffffff;
+}
+/* CART ICON */
+.cart-icon{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#ff6600;
+  color:white;
+  padding:10px 15px;
+  border-radius:30px;
+  cursor:pointer;
+  z-index:1000;
+}
+
+#cart-count{
+  background:white;
+  color:black;
+  padding:2px 6px;
+  border-radius:50%;
+  margin-left:5px;
+}
+
+/* POPUP */
+.cart-popup{
+  position:fixed;
+  right:-400px;
+  top:0;
+  width:300px;
+  height:100%;
+  background:white;
+  box-shadow:-5px 0 15px rgba(0,0,0,0.2);
+  padding:20px;
+  transition:0.4s;
+  z-index:999;
+}
+
+.cart-popup.active{
+  right:0;
+}
+
+.cart-item{
+  border-bottom:1px solid #ddd;
+  padding:10px 0;
+}
+
+.cart-item button{
+  background:red;
+  color:white;
+  border:none;
+  padding:5px 8px;
+  cursor:pointer;
+}
+.brand-icon {
+  width: 100px;
+  height: 35px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.brand:hover{
+    blackground: color : black;
+}
+.banner{
+  width:100%;
+  height:250px;
+  overflow:hidden;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+.banner video,
+.banner iframe{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h2>SA Laptop </h2>
+
+  <div class="head">
+    <a href="#">Profile</a>
+    <a href="#">Sign Up</a>
+    <a href="#">Join</a>
+  </div>
+</div>
+<!-- CART ICON -->
+
+</div>
+
+<!-- CART POPUP -->
+<div class="cart-popup" id="cartPopup">
+  <h3>Your Cart</h3>
+  <div id="cart-items"></div>
+  <button onclick="closeCart()">Close</button>
+</div>
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <h3>Brand</h3>
+    <button onclick="filter('razer')">
+  <img src="https://tkcustomcomputer.com/assets/uploads/brands/f5cd6f347cf02020566755e1cfbbc500.png" class="brand-icon">
+  <span></span>
+</button>
+
+    <button onclick="filter('adata')">
+  <img src="https://tkcustomcomputer.com/assets/uploads/brands/2207eb81e4bc87d3ba31a1ce672dcb91.png" class="brand-icon">
+  <span></span>
+</button>
+<button onclick="filter('MSI')">
+  <img src="https://tkcustomcomputer.com/assets/uploads/brands/463b7049316dce86a392aeb2d0f1bc2c.png" class="brand-icon">
+  <span></span>
+</button>
+    <button onclick="filter('hyper')">
+  <img src="https://tkcustomcomputer.com/assets/uploads/brands/39c8c2def4a2885df6247fdbbcf0cec1.png" class="brand-icon">
+  <span></span>
+</button>
+    <button onclick="filter('akko')">
+  <img src="https://tkcustomcomputer.com/assets/uploads/brands/d3ad0d59c5c8e14f3edea591e7e5b007.png" class="brand-icon">
+  <span></span>
+  
+  </div>
+  
+
+  <!-- CATEGORY -->
+  <div class="category">
+     <a href="homepage.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/c472584124c3515291d1e04f6723d4c1.png">
+    </a>
+      <p>laptop</p>
+    </div>
+    <a href="hardware.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/7e1ed178e5d9f9f0e0666af1cc42bd51.svg">
+    </a>
+      <p>Pc Hardware</p>
+    </div>
+    <a href="leptop.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/4c4b6269cf3ba46afeb3e57297674933.png">
+    </a>
+      <p>Mouse</p>
+    </div>
+    <a href="leptop.html" class="menu-item">
+    <div class="cart-box">
+      <img src="https://tkcustomcomputer.com/assets/uploads/menus/a71085979573d4812bc880df5eb68b65.svg">
+    </a>
+      <p>Accessories</p>
+    </div>
+    
+    <div class="">
+         <a href="shoesmen.html" class="menu-item"></a>
+      
+      
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="products">
+    <div class="card" data-brand="razer">
+      <a href ="m1.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/709365e672fc02bb2e9a01ecb8e95313.jpg">
+      </a>
+      <h4>Razer Cobra : 58g, Gen-3 Optical Switches</h4>
+      <p class="price">$$49.00</p>
+    </div>
+    <div class="card" data-brand="razer">
+       ​​<a href="m2.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/54bca9cdecd8cc989f78e71aa50af714.jpg">
+      </a>
+      <h4>Razer Ornata V3 X Low Profile Keys</h4>
+      <p class="price">$69.00</p>
+    </a>
+    </div>
+
+    <div class="card" data-brand="razer">
+       <a href ="m3.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/5a518a99abffabdd7a8710aa433b95a0.jpg">
+      </a>
+      <h3>Razer Viper V3 Pro Wireless</h3>
+      <p class="price">$169.00</p>
+    </div>
+ <div class="card" data-brand="akko">
+  <a href ="m4.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/d6d0781c43766f806196d7f47ee45aad.jpg">
+      </a>
+      <h3>Razer Seiren V3 Mini USB Microphone </h3>
+   
+      <p class="price">$69.00</p>
+   
+    </div>
+
+    <div class="card" data-brand="hyper">
+      <a href ="4.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/9e721b2d6d8db7f676cf37d8bb57b7fd.jpg">
+      </a>
+      <h3>Razer Seiren V3 Chroma RGB USB Microphone</h3>
+      <p class="price">$129.00</p>
+    </div>
+
+    <div class="card" data-brand="hyper">
+      <a href ="5.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/4e748a69551a803963f5c2660e4a1080.jpg">
+      </a>
+      <h3>Razer Cobra Wired 58g Lightweight Design</h3>
+      <p class="price">$49.00</p>
+    
+    </div>
+     <div class="card" data-brand="adata">
+      <a href="6.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/bbe687972454c99265be0ea927a3c32f.jpg">
+      </a>
+      <h3>Razer BlackShark V2 X Gaming Headset</h3>
+      <p class="price">$49.00</p>
+    </div>
+    <div class="card" data-brand="akko">
+      <a href ="5.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/b3678465bae85bdae6880ad8f315d71e.jpg">
+      </a>
+      <h3>Logitech MK345 Wireless Combo Full-Sized Keyboard</h3>
+      <p class="price">$29.00</p>
+    
+    
+    </div>
+     <div class="card" data-brand="akko">
+      <a href="6.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/be1d1e04e87bb1b3584760ea26f352c1.jpg">
+      </a>
+      <h3>Logitech Wireless Signature M650 - Small to Medium Sized Hands</h3>
+      <p class="price">$49.00</p>
+    </div>
+
+    
+
+
+    <div class="card" data-brand="lenovo">
+      <a href="ac1.html">
+      <img src="https://tkcustomcomputer.com/assets/uploads/74ccc361a93787a8bbe58eedae1d9cd1.jpg">
+      </a>
+      <h3>Razer - Huntsman V3 Pro TKL </h3>
+      <p class="price">$$225.00</p>
+    </div>
+  </div>
+  
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+
+  <div class="footer-box">
+    <h3>About</h3>
+    <p>Best laptop shop with quality and warranty.</p>
+  </div>
+
+  <div class="footer-box">
+    <h3>Contact</h3>
+    <p>Email: sasa@gmail.com</p>
+    <p>Phone: 012345678</p>
+  </div>
+
+  <div class="footer-box">
+    <h3>Follow Us</h3>
+    <div class="social">
+      <a href="#">Facebook</a>
+      <a href="#">YouTube</a>
+      <a href="#">Telegram</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function filter(brand){
+  let items = document.querySelectorAll(".card");
+
+  items.forEach(item=>{
+    if(brand === "all" || item.dataset.brand === brand){
+      item.style.display = "flex";
+    }else{
+      item.style.display = "none";
+    }
+    
+  });
+}
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function updateCart(){
+  let cartItems = document.getElementById("cart-items");
+  let count = document.getElementById("cart-count");
+
+  cartItems.innerHTML = "";
+  count.innerText = cart.length;
+
+  cart.forEach((item, index)=>{
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <p>${item.name}</p>
+        <p>$${item.price}</p>
+        <button onclick="removeItem(${index})">Remove</button>
+      </div>
+    `;
+  });
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function addToCart(name, price){
+  cart.push({name, price});
+  updateCart();
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  updateCart();
+}
+
+function openCart(){
+  document.getElementById("cartPopup").classList.add("active");
+}
+
+function closeCart(){
+  document.getElementById("cartPopup").classList.remove("active");
+}
+
+updateCart();
+</script>
+</script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MSI Product</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f5f5f5;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background:#111;
+    color:white;
+    padding:18px 40px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* PRODUCT */
+
+.product{
+    width:90%;
+    max-width:1200px;
+    margin:50px auto;
+    background:white;
+    border-radius:25px;
+    padding:40px;
+    display:flex;
+    gap:50px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* IMAGE */
+
+.product-image{
+    flex:1;
+    text-align:center;
+}
+
+.product-image img{
+    width:100%;
+    max-width:500px;
+    transition:0.3s;
+}
+
+.product-image img:hover{
+    transform:scale(1.05);
+}
+
+/* INFO */
+
+.product-info{
+    flex:1;
+}
+
+.product-info h1{
+    font-size:45px;
+    margin-bottom:20px;
+}
+
+.price{
+    color:orangered;
+    font-size:40px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+.spec{
+    font-size:20px;
+    line-height:2;
+    color:#333;
+}
+
+.buy{
+    margin-top:35px;
+}
+
+.buy button{
+    padding:15px 35px;
+    border:none;
+    border-radius:12px;
+    background:orange;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.buy button:hover{
+    background:#ff6600;
+    transform:translateY(-3px);
+}
+.cart-btn{
+    padding:15px 35px;
+    border:none;
+    border-radius:12px;
+    background:orange;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.cart-btn:hover{
+    background:#ff6600;
+    transform:translateY(-3px);
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    SA Laptop
+</div>
+
+<div class="product">
+
+    <div class="product-image">
+        <img src="https://tkcustomcomputer.com/assets/uploads/0fbcb67f351e6b499acde2bf7a672352.jpg">
+    </div>
+
+    <div class="product-info">
+
+        <h1>ASUS ROG Flow Z13</h1>
+
+        <div class="price">
+          $2,499.00
+        </div>
+
+        <div class="spec">
+        
+ASUS  GZ302EA-RU079WS<br>
+- CPU : AMD Ryzen AI MAX+ 395 (16C/32Th)<br>
+- RAM : 32GB LPDDR5X<br>
+- Storage : 1TB M.2 Pcie<br>
+- Screen : 13.4" 2.5K (2560 x 1600) 180Hz<br>
+- VGA : Radeon 8060S<br>
+- Keyboard : 1-Zone RGB<br>
+- OS : Windows 11 Home (64-bit)<br>
+- Battery : 70WHrs, 4S1P<br>
+- Weight : 1.20 Kg | Color : Black<br>
+
+-------------------------
+
+Free :<br>
+
+- Zephyrus G4Sleeve<br>
+- ROG Impact Mousev<br>
+- Headset<br>
+- Laptop Fans<br>
+- ដៃហ្គេម<br>
+- FLash 128GB<br>
+- Mouse Padv
+        </div>
+
+        <div class="buy">
+          <button class="addtocart.html" onclick="addToCart()">
+    Add To Cart
+</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function addToCart(){
+
+    alert("Added To Cart");
+
+    window.location.href = "addtocart.html";
+
+}
+
+</script>
+</body>
+</html>

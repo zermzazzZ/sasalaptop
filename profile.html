@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SASA LAPTOP - Ultra Auth PRO</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+    radial-gradient(circle at top left,#fffdfc 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#fffdfc 0%,transparent 30%),
+    #0f0f0f;
+    overflow:hidden;
+}
+
+/* BG EFFECT */
+
+.blur{
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:.35;
+}
+
+.blur1{
+    background:#000000;
+    top:-100px;
+    left:-100px;
+}
+
+.blur2{
+    background:#000000;
+    bottom:-120px;
+    right:-100px;
+}
+
+/* CONTAINER */
+
+.container{
+    width:95%;
+    max-width:1200px;
+    min-height:700px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(25px);
+    border-radius:35px;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    box-shadow:0 25px 70px rgba(0,0,0,.5);
+    position:relative;
+    z-index:2;
+}
+
+/* LEFT */
+
+.left{
+    padding:60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    background:
+    linear-gradient(135deg,
+    rgba(0, 0, 0, 0.95),
+    rgba(0, 0, 0, 0.95));
+    color:white;
+    position:relative;
+}
+
+.logo{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:55px;
+    font-weight:800;
+    color:#000000;
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+    margin-bottom:25px;
+}
+
+.left h1{
+    font-size:58px;
+    line-height:1.1;
+    font-weight:800;
+}
+
+.left p{
+    margin-top:18px;
+    font-size:16px;
+    opacity:.95;
+    max-width:420px;
+}
+
+.features{
+    margin-top:35px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.feature{
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.18);
+    padding:14px 18px;
+    border-radius:15px;
+    font-size:14px;
+    backdrop-filter:blur(10px);
+}
+
+/* RIGHT */
+
+.right{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+.card{
+    width:100%;
+    max-width:430px;
+}
+
+.tabs{
+    display:flex;
+    gap:30px;
+    margin-bottom:30px;
+}
+
+.tab{
+    color:#777;
+    font-weight:700;
+    cursor:pointer;
+    position:relative;
+    transition:.3s;
+}
+
+.tab.active{
+    color:white;
+}
+
+.tab.active::after{
+    content:'';
+    position:absolute;
+    bottom:-8px;
+    left:0;
+    width:100%;
+    height:3px;
+    border-radius:10px;
+    background:linear-gradient(90deg,#000000,#000000);
+}
+
+/* FORM */
+
+.form-title{
+    color:white;
+    font-size:34px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.form-sub{
+    color:#999;
+    font-size:14px;
+    margin-bottom:28px;
+}
+
+.group{
+    margin-bottom:18px;
+}
+
+.group label{
+    display:block;
+    margin-bottom:8px;
+    color:#bbb;
+    font-size:14px;
+}
+
+.group input{
+    width:100%;
+    padding:16px;
+    border-radius:16px;
+    border:1px solid #2c2c2c;
+    background:#111;
+    color:white;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+}
+
+.group input:focus{
+    border-color:#fffaf5;
+    box-shadow:0 0 0 4px rgba(255,122,0,.15);
+}
+
+.btn{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(90deg,#fffbfb,#000000);
+    color:white;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+    margin-top:10px;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(255,122,0,.35);
+}
+
+.meta{
+    display:flex;
+    justify-content:space-between;
+    margin-top:16px;
+    font-size:13px;
+    color:#888;
+}
+
+.social{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:24px;
+}
+
+.social button{
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.social button:hover{
+    transform:translateY(-2px);
+}
+
+.fb{
+    background:#1877f2;
+    color:white;
+}
+
+.gg{
+    background:white;
+    color:#111;
+}
+
+.switch{
+    margin-top:24px;
+    text-align:center;
+    color:#999;
+    font-size:14px;
+}
+
+.switch span{
+    color:#000000;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.msg{
+    margin-top:16px;
+    font-size:14px;
+    color:#7CFC00;
+}
+
+.err{
+    color:#ff6b6b;
+}
+
+.hidden{
+    display:none;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.container{
+    grid-template-columns:1fr;
+}
+
+.left{
+    padding:40px 30px;
+    text-align:center;
+    align-items:center;
+}
+
+.left h1{
+    font-size:42px;
+}
+
+.logo{
+    width:110px;
+    height:110px;
+    font-size:40px;
+}
+
+.features{
+    width:100%;
+}
+
+.right{
+    padding:35px 25px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="blur blur1"></div>
+<div class="blur blur2"></div>
+
+<div class="container">
+
+    <!-- LEFT -->
+
+    <section class="left">
+
+        <div class="logo">
+            S
+        </div>
+
+        <h1>SASA<br>LAPTOP</h1>
+
+        <p>
+            Premium Gaming Laptop Store with Ultra Secure Authentication System.
+        </p>
+
+        <div class="features">
+
+            <div class="feature">
+                ⚡ Fast Login Experience
+            </div>
+
+            <div class="feature">
+                🔒 Secure Local Authentication
+            </div>
+
+            <div class="feature">
+                💻 Modern Gaming Laptop Shop
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- RIGHT -->
+
+    <section class="right">
+
+        <div class="card">
+
+            <div class="tabs">
+                <div id="loginTab" class="tab active" onclick="showLogin()">
+                    Log In
+                </div>
+
+                <div id="signupTab" class="tab" onclick="showSignup()">
+                    Sign Up
+                </div>
+            </div>
+
+            <!-- LOGIN -->
+
+            <div id="loginBox">
+
+                <div class="form-title">
+                    Welcome Back
+                </div>
+
+                <div class="form-sub">
+                    Login to continue shopping.
+                </div>
+
+                <div class="group">
+                    <label>Username</label>
+                    <input id="loginUser" placeholder="Enter username">
+                </div>
+
+                <div class="group">
+                    <label>Password</label>
+                    <input id="loginPass" type="password" placeholder="Enter password">
+                </div>
+
+                <button class="btn" onclick="login()">
+                    LOG IN
+                </button>
+
+                <div class="meta">
+                    <span>Forgot Password?</span>
+                    <span>Saved locally</span>
+                </div>
+
+                <div class="social">
+                    <button class="fb">Facebook</button>
+                    <button class="gg">Google</button>
+                </div>
+
+                <div class="switch">
+                    New here?
+                    <span onclick="showSignup()">
+                        Create account
+                    </span>
+                </div>
+
+                <div id="loginMsg" class="msg"></div>
+
+            </div>
+
+            <!-- SIGNUP -->
+
+            <div id="signupBox" class="hidden">
+
+                <div class="form-title">
+                    Create Account
+                </div>
+
+                <div class="form-sub">
+                    Register your new account.
+                </div>
+
+                <div class="group">
+                    <label>Username</label>
+                    <input id="regUser" placeholder="Create username">
+                </div>
+
+                <div class="group">
+                    <label>Password</label>
+                    <input id="regPass" type="password" placeholder="Create password">
+                </div>
+
+                <button class="btn" onclick="signup()">
+                    SIGN UP
+                </button>
+
+                <div class="switch">
+                    Already have account?
+                    <span onclick="showLogin()">
+                        Log In
+                    </span>
+                </div>
+
+                <div id="signupMsg" class="msg"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script>
+
+const $ = id => document.getElementById(id);
+
+function showSignup(){
+
+    $('loginBox').classList.add('hidden');
+    $('signupBox').classList.remove('hidden');
+
+    $('loginTab').classList.remove('active');
+    $('signupTab').classList.add('active');
+
+}
+
+function showLogin(){
+
+    $('signupBox').classList.add('hidden');
+    $('loginBox').classList.remove('hidden');
+
+    $('signupTab').classList.remove('active');
+    $('loginTab').classList.add('active');
+
+}
+
+function users(){
+
+    return JSON.parse(
+        localStorage.getItem('users') || '[]'
+    );
+
+}
+
+function save(arr){
+
+    localStorage.setItem(
+        'users',
+        JSON.stringify(arr)
+    );
+
+}
+
+function signup(){
+
+    let u = $('regUser').value.trim();
+    let p = $('regPass').value.trim();
+
+    if(!u || !p)
+    return msg(
+        'signupMsg',
+        'Please fill all fields',
+        1
+    );
+
+    let arr = users();
+
+    if(arr.find(x => x.user === u))
+    return msg(
+        'signupMsg',
+        'User already exists',
+        1
+    );
+
+    arr.push({
+        user:u,
+        pass:p
+    });
+
+    save(arr);
+
+    msg(
+        'signupMsg',
+        'Signup successful'
+    );
+
+    setTimeout(showLogin,700);
+
+}
+
+function login(){
+
+    let u = $('loginUser').value.trim();
+    let p = $('loginPass').value.trim();
+
+    let found = users().find(
+        x => x.user === u && x.pass === p
+    );
+
+    if(!found)
+    return msg(
+        'loginMsg',
+        'Wrong username or password',
+        1
+    );
+
+    localStorage.setItem(
+        'session',
+        'true'
+    );
+
+    msg(
+        'loginMsg',
+        'Login successful'
+    );
+
+    setTimeout(()=>{
+        window.location.href='homepage.html';
+    },700);
+
+}
+
+function msg(id,text,error){
+
+    let el = $(id);
+
+    el.textContent = text;
+
+    el.className =
+    'msg' + (error ? ' err' : '');
+
+}
+
+</script>
+
+</body>
+</html>
