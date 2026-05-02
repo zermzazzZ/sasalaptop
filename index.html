@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>SASA Laptop Shop</title>
 
@@ -10,6 +11,7 @@ body{
   font-family:Arial;
   background:#f5f5f5;
 }
+
 .products{
     flex:1;
     display:grid;
@@ -260,7 +262,8 @@ body{
 }
 
 .footer-box{
-  max-width:250px;
+  width: 100%;
+max-width: 350px;
 }
 
 .footer p{
@@ -351,6 +354,26 @@ body{
   height:100%;
   object-fit:cover;
 }
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .products {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
 </style>
 </head>
 
@@ -362,7 +385,7 @@ body{
 
   <div class="head">
     <a href="profile.html">Join</a>
-    <a href="#">Sign Up</a>
+    <a href="singup.html">prfile</a>
   </div>
 </div>
 
@@ -404,7 +427,7 @@ body{
 
   <!-- CATEGORY -->
   <div class="category">
-     <a href="homepage.html" class="menu-item">
+     <a href="index.html" class="menu-item">
     <div class="cart-box">
       <img src="https://tkcustomcomputer.com/assets/uploads/menus/c472584124c3515291d1e04f6723d4c1.png">
     </a>
